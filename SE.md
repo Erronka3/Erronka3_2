@@ -1,3 +1,8 @@
+---
+layout: page
+title: Sistema Eragileak
+---
+
 ##  1. Baliabideen Monitorizazioa eta Kudeaketa
 
 Zerbitzariaren osasuna (RAM, PUZa, Diskoa eta Sarea) bi bideetatik kontrolatu da:
