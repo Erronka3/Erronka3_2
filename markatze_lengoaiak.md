@@ -3,48 +3,62 @@ layout: page
 title: Markatze lengoaiak
 ---
 
+# Turismo Analitika: Proiektuaren Egitura eta Garapen Teknikoa
 
+Proiektu honek **turismo-fluxuak aztertzeko plataforma digital bat** aurkezten du. Dokumentazio honek sistemaren arkitektura teknikoa, fitxategien antolaketa eta datuen tratamendua azaltzen ditu.
 
-Turismo Analitika - Proiektuaren Dokumentazioa
-Turismo-bulegoetako datuak kudeatzeko, bistaratzeko eta analizatzeko plataforma digitala. Proiektu hau Turismoaren Etorkizuna: Datuen Adimena eta Jasangarritasuna erronkaren barruan garatu da.
+---
 
-Proiektuaren Helburua
-Proiektu honen helburu nagusia turismo-fluxuak monitorizatzea da. Datu gordinak (XML formatuan daudenak) informazio bisual baliotsu bihurtzen ditugu, kudeaketa adimentsu eta jasangarri bat ahalbidetzeko.
+## 1. Arkitektura Teknikoa
 
- Teknologiak
-Proiektu hau teknologia hauekin eraiki da:
+Aplikazioa bezeroaren aldeko (*client-side*) arkitektura baten gainean eraiki da, teknologia hauek erabiliz:
 
-HTML5 / CSS3: Egitura eta diseinu arduratsua.
+* **Datu-egitura (XML):** Informazio guztia formatu hierarkikoan gordetzen da, beste sistema batzuekin interoperabilitatea bermatzeko.
+* **Logika Dinamikoa (jQuery & AJAX):** Datuak modu asinkronoan kargatzen dira, webgunea freskatu beharrik gabe erabiltzailearen esperientzia hobetzeko.
+* **Bistaratze Grafikoa (Chart.js):** Datu estatistikoak (maximoak, minimoak eta batez bestekoak) modu bisualean interpretatzeko liburutegia.
+* **Diseinu Arduratsua (CSS3):** Flexbox eta Sticky posizionamendua erabili dira interfaze garbi eta moldagarri bat lortzeko.
 
-JavaScript (jQuery): Logika dinamikoa eta XML datuen tratamendua.
+---
 
-Chart.js: Grafiko interaktiboak bistaratzeko.
+## 2. Fitxategien Egitura eta Eginkizunak
 
-XML: Datuen biltegiratze lokala.
+Proiektua modulu hauetan banatuta dago:
 
- Fitxategien Egitura
-sarrera.html: Proiektuaren hasiera orria eta aurkezpena.
+### 📂 HTML (Egitura)
+* **`sarrera.html`**: Hasiera orria. Proiektuaren helburu estrategikoak eta testuingurua aurkezten ditu.
 ![Captura sarrera](img/Markatze%20lengoaiak/sarrera.png)
-3erronka.html: Datuen panel nagusia (Dashboard).
-![Captura sarrera](img/Markatze%20lengoaiak/3erronka.png)
-txostena.html: Open Data atala, JSON deskargekin.
-![Captura sarrera](img/Markatze%20lengoaiak/txostena.png)
-3erronka.css: Estilo fitxategi orokorra.
 
-3erronka.js: Datuak kargatzeko, iragazteko eta grafikoak sortzeko logika.
+* **`3erronka.html`**: Dashboard nagusia. Hemen kokatzen dira iragazkiak, grafiko interaktiboak eta eguneko datuen fitxak.
+![Captura dashboard](img/Markatze%20lengoaiak/3erronka.png)
 
-datuak.xml: Iturri-datu guztiak biltzen dituen fitxategia.
+* **`txostena.html`**: Open Data atala. Datuak JSON formatuan deskargatzeko gunea.
+![Captura txostena](img/Markatze%20lengoaiak/txostena.png)
 
- Funtzio Nagusiak
-1. Datuen Bistaratzea
-Panel nagusian (3erronka.html), erabiltzaileak bisitari kopuruen grafikoak ikus ditzake. Grafiko hauek dinamikoak dira eta aukeratutako iragazkien arabera eguneratzen dira.
+### 🎨 CSS (Diseinua)
+* **`3erronka.css`**: Estilo fitxategi bateratua. Kolore paleta berdea erabili da jasangarritasunaren irudia indartzeko eta osagaien itxura definitzen du.
 
-2. Iragazki Sistema
-Datuak bi modutara iragazi daitezke:
+### ⚙️ JavaScript (Logika)
+* **`3erronka.js`**: Fitxategi nagusia. XML datuen karga (AJAX), datuen parseatzea eta grafikoaren eguneraketa kudeatzen ditu.
+* **`opendata.js`**: Deskarga sistemaren logika gehigarria kudeatzeko erabilgarria.
 
-Egunaren arabera: Egun zehatz bateko datuak edo denbora-lerro osoa ikusteko.
+### 📊 Data (Iturria)
+* **`datuak.xml`**: Proiektuaren "datu-basea". Ofizina, data, bisitari kopurua eta jatorria biltzen dituen fitxategia.
 
-Jatorriaren arabera: Herrialde bakoitzeko bulegoaren datu espezifikoak aztertzeko.
+---
 
-3. Open Data eta Deskargak
-Proiektuak gardentasuna sustatzen du. txostena.html orrialdean, erabiltzaileak egun bakoitzeko datu gordinak JSON formatuan deskarga ditzake, beste analisi batzuk egiteko.
+## 3. Datuen Fluxua (Data Workflow)
+
+Aplikazioak prozesu hau jarraitzen du datuak erakusteko:
+
+1. **Eskaera (Request):** Orrialdea kargatzean, JavaScript-ak AJAX eskaera bat egiten du `datuak.xml` fitxategia lortzeko.
+2. **Prozesatzea (Parsing):** XML testua DOM objektu bihurtzen da. Algoritmoak datuak array-etan antolatzen ditu.
+3. **Iragaztea (Filtering):** Erabiltzaileak hautatzaileak aldatzean, logika honek datu espezifikoak erauzten ditu.
+4. **Eguneratzea (Rendering):** Chart.js liburutegiak grafikoa berriz marrazten du dinamikoki.
+
+---
+
+## 4. Funtzio Nagusiak
+
+1. **Datuen Bistaratzea:** Panel nagusian, erabiltzaileak bisitari kopuruen grafiko dinamikoak ikus ditzake.
+2. **Iragazki Sistema:** Datuak **egunaren** arabera edo **jatorriaren** (bulegoa) arabera iragazi daitezke.
+3. **Open Data eta Deskargak:** Proiektuak gardentasuna sustatzen du; erabiltzaileak datu gordinak **JSON formatuan** deskarga ditzake `txostena.html` orrialdean.
