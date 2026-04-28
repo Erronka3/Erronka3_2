@@ -8,10 +8,10 @@ title: Markatze lengoaiak
 Turismo Analitika - Proiektuaren Dokumentazioa
 Turismo-bulegoetako datuak kudeatzeko, bistaratzeko eta analizatzeko plataforma digitala. Proiektu hau Turismoaren Etorkizuna: Datuen Adimena eta Jasangarritasuna erronkaren barruan garatu da.
 
-🚀 Proiektuaren Helburua
+Proiektuaren Helburua
 Proiektu honen helburu nagusia turismo-fluxuak monitorizatzea da. Datu gordinak (XML formatuan daudenak) informazio bisual baliotsu bihurtzen ditugu, kudeaketa adimentsu eta jasangarri bat ahalbidetzeko.
 
-🛠 Teknologiak
+ Teknologiak
 Proiektu hau teknologia hauekin eraiki da:
 
 HTML5 / CSS3: Egitura eta diseinu arduratsua.
@@ -22,9 +22,9 @@ Chart.js: Grafiko interaktiboak bistaratzeko.
 
 XML: Datuen biltegiratze lokala.
 
-📁 Fitxategien Egitura
+ Fitxategien Egitura
 sarrera.html: Proiektuaren hasiera orria eta aurkezpena.
-
+![Captura sarrera](img/sarrera.png)
 3erronka.html: Datuen panel nagusia (Dashboard).
 
 txostena.html: Open Data atala, JSON deskargekin.
@@ -35,7 +35,7 @@ txostena.html: Open Data atala, JSON deskargekin.
 
 datuak.xml: Iturri-datu guztiak biltzen dituen fitxategia.
 
-📊 Funtzio Nagusiak
+ Funtzio Nagusiak
 1. Datuen Bistaratzea
 Panel nagusian (3erronka.html), erabiltzaileak bisitari kopuruen grafikoak ikus ditzake. Grafiko hauek dinamikoak dira eta aukeratutako iragazkien arabera eguneratzen dira.
 
