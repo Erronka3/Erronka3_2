@@ -24,7 +24,7 @@ Aplikazioa bezeroaren aldeko (*client-side*) arkitektura baten gainean eraiki da
 
 Proiektua modulu hauetan banatuta dago:
 
-### 📂 HTML (Egitura)
+###  HTML (Egitura)
 * **`sarrera.html`**: Hasiera orria. Proiektuaren helburu estrategikoak eta testuingurua aurkezten ditu.
 ![Captura sarrera](img/Markatze%20lengoaiak/sarrera.png)
 
@@ -34,14 +34,14 @@ Proiektua modulu hauetan banatuta dago:
 * **`txostena.html`**: Open Data atala. Datuak JSON formatuan deskargatzeko gunea.
 ![Captura txostena](img/Markatze%20lengoaiak/txostena.png)
 
-### 🎨 CSS (Diseinua)
+###  CSS (Diseinua)
 * **`3erronka.css`**: Estilo fitxategi bateratua. Kolore paleta berdea erabili da jasangarritasunaren irudia indartzeko eta osagaien itxura definitzen du.
 
-### ⚙️ JavaScript (Logika)
+### JavaScript (Logika)
 * **`3erronka.js`**: Fitxategi nagusia. XML datuen karga (AJAX), datuen parseatzea eta grafikoaren eguneraketa kudeatzen ditu.
 * **`opendata.js`**: Deskarga sistemaren logika gehigarria kudeatzeko erabilgarria.
 
-### 📊 Data (Iturria)
+###  Data (Iturria)
 * **`datuak.xml`**: Proiektuaren "datu-basea". Ofizina, data, bisitari kopurua eta jatorria biltzen dituen fitxategia.
 
 ---
