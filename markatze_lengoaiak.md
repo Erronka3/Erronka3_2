@@ -61,4 +61,4 @@ Aplikazioak prozesu hau jarraitzen du datuak erakusteko:
 
 1. **Datuen Bistaratzea:** Panel nagusian, erabiltzaileak bisitari kopuruen grafiko dinamikoak ikus ditzake.
 2. **Iragazki Sistema:** Datuak **egunaren** arabera edo **jatorriaren** (bulegoa) arabera iragazi daitezke.
-3. **Open Data eta Deskargak:** Proiektuak gardentasuna sustatzen du; erabiltzaileak datu gordinak **JSON formatuan** deskarga ditzake `txostena.html` orrialdean.
+3. **Open Data eta Deskargak:** Proiektuak gardentasuna sustatzen du; erabiltzaileak datu gordinak **JSON formatuan** deskarga ditzake `txostena.html` orrialdean.  
