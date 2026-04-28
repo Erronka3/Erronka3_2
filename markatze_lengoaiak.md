@@ -10,55 +10,48 @@ Proiektu honek **turismo-fluxuak aztertzeko plataforma digital bat** aurkezten d
 ---
 
 ## 1. Arkitektura Teknikoa
-
 Aplikazioa bezeroaren aldeko (*client-side*) arkitektura baten gainean eraiki da, teknologia hauek erabiliz:
 
-* **Datu-egitura (XML):** Informazio guztia formatu hierarkikoan gordetzen da, beste sistema batzuekin interoperabilitatea bermatzeko.
-* **Logika Dinamikoa (jQuery & AJAX):** Datuak modu asinkronoan kargatzen dira, webgunea freskatu beharrik gabe erabiltzailearen esperientzia hobetzeko.
-* **Bistaratze Grafikoa (Chart.js):** Datu estatistikoak (maximoak, minimoak eta batez bestekoak) modu bisualean interpretatzeko liburutegia.
-* **Diseinu Arduratsua (CSS3):** Flexbox eta Sticky posizionamendua erabili dira interfaze garbi eta moldagarri bat lortzeko.
+* **Datu-egitura (XML):** Informazio guztia formatu hierarkikoan gordetzen da.
+* **Logika Dinamikoa (jQuery & AJAX):** Datuak modu asinkronoan kargatzen dira, webgunea freskatu beharrik gabe.
+* **Bistaratze Grafikoa (Chart.js):** Datu estatistikoak modu bisualean interpretatzeko liburutegia.
+* **Diseinu Arduratsua (CSS3):** *Flexbox* eta *Sticky* posizionamendua erabili dira.
 
 ---
 
 ## 2. Fitxategien Egitura eta Eginkizunak
 
-Proiektua modulu hauetan banatuta dago:
-
-###  HTML (Egitura)
-* **`sarrera.html`**: Hasiera orria. Proiektuaren helburu estrategikoak eta testuingurua aurkezten ditu.
+### 📂 HTML (Egitura)
+* **`sarrera.html`**: Hasiera orria eta proiektuaren testuingurua.
 ![Captura sarrera](img/Markatze%20lengoaiak/sarrera.png)
 
-* **`3erronka.html`**: Dashboard nagusia. Hemen kokatzen dira iragazkiak, grafiko interaktiboak eta eguneko datuen fitxak.
+* **`3erronka.html`**: Dashboard nagusia (iragazkiak eta grafikoak).
 ![Captura dashboard](img/Markatze%20lengoaiak/3erronka.png)
 
-* **`txostena.html`**: Open Data atala. Datuak JSON formatuan deskargatzeko gunea.
+* **`txostena.html`**: Open Data atala, JSON deskargekin.
 ![Captura txostena](img/Markatze%20lengoaiak/txostena.png)
 
-###  CSS (Diseinua)
-* **`3erronka.css`**: Estilo fitxategi bateratua. Kolore paleta berdea erabili da jasangarritasunaren irudia indartzeko eta osagaien itxura definitzen du.
+### 🎨 CSS eta ⚙️ JS
+* **`3erronka.css`**: Estilo fitxategi bateratua (kolore paleta berdea).
+* **`3erronka.js`**: Logika nagusia (AJAX, Parsing eta Chart.js).
+* **`opendata.js`**: Deskarga sistemarako logika gehigarria.
 
-### JavaScript (Logika)
-* **`3erronka.js`**: Fitxategi nagusia. XML datuen karga (AJAX), datuen parseatzea eta grafikoaren eguneraketa kudeatzen ditu.
-* **`opendata.js`**: Deskarga sistemaren logika gehigarria kudeatzeko erabilgarria.
-
-###  Data (Iturria)
-* **`datuak.xml`**: Proiektuaren "datu-basea". Ofizina, data, bisitari kopurua eta jatorria biltzen dituen fitxategia.
+### 📊 Data
+* **`datuak.xml`**: Proiektuaren "datu-basea".
 
 ---
 
 ## 3. Datuen Fluxua (Data Workflow)
 
-Aplikazioak prozesu hau jarraitzen du datuak erakusteko:
-
-1. **Eskaera (Request):** Orrialdea kargatzean, JavaScript-ak AJAX eskaera bat egiten du `datuak.xml` fitxategia lortzeko.
-2. **Prozesatzea (Parsing):** XML testua DOM objektu bihurtzen da. Algoritmoak datuak array-etan antolatzen ditu.
-3. **Iragaztea (Filtering):** Erabiltzaileak hautatzaileak aldatzean, logika honek datu espezifikoak erauzten ditu.
-4. **Eguneratzea (Rendering):** Chart.js liburutegiak grafikoa berriz marrazten du dinamikoki.
+1. **Eskaera (Request):** AJAX bidez `datuak.xml` fitxategia lortzen da.
+2. **Prozesatzea (Parsing):** XMLa DOM objektu bihurtzen da eta datuak antolatzen dira.
+3. **Iragaztea (Filtering):** Erabiltzaileak hautatzaileak aldatzean, datu espezifikoak erauzten dira.
+4. **Eguneratzea (Rendering):** Grafikoa berriz marrazten da dinamikoki.
 
 ---
 
 ## 4. Funtzio Nagusiak
 
-1. **Datuen Bistaratzea:** Panel nagusian, erabiltzaileak bisitari kopuruen grafiko dinamikoak ikus ditzake.
-2. **Iragazki Sistema:** Datuak **egunaren** arabera edo **jatorriaren** (bulegoa) arabera iragazi daitezke.
-3. **Open Data eta Deskargak:** Proiektuak gardentasuna sustatzen du; erabiltzaileak datu gordinak **JSON formatuan** deskarga ditzake `txostena.html` orrialdean.
+* **Datuen Bistaratzea:** Grafiko dinamikoak panel nagusian.
+* **Iragazki Sistema:** Datuak **egunaren** edo **jatorriaren** arabera iragazi daitezke.
+* **Open Data:** Datu gordinak **JSON formatuan** deskargatzeko aukera.
