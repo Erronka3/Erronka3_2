@@ -24,7 +24,7 @@ XML: Datuen biltegiratze lokala.
 
  Fitxategien Egitura
 sarrera.html: Proiektuaren hasiera orria eta aurkezpena.
-![Captura sarrera](img/sarrera.png)
+![Captura sarrera](img/Markatze%20lengoaiak/sarrera.png)
 3erronka.html: Datuen panel nagusia (Dashboard).
 
 txostena.html: Open Data atala, JSON deskargekin.
