@@ -26,9 +26,9 @@ XML: Datuen biltegiratze lokala.
 sarrera.html: Proiektuaren hasiera orria eta aurkezpena.
 ![Captura sarrera](img/Markatze%20lengoaiak/sarrera.png)
 3erronka.html: Datuen panel nagusia (Dashboard).
-
+![Captura sarrera](img/Markatze%20lengoaiak/3erronka.png)
 txostena.html: Open Data atala, JSON deskargekin.
-
+![Captura sarrera](img/Markatze%20lengoaiak/txostena.png)
 3erronka.css: Estilo fitxategi orokorra.
 
 3erronka.js: Datuak kargatzeko, iragazteko eta grafikoak sortzeko logika.
