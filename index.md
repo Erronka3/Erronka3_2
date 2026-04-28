@@ -1,3 +1,7 @@
+---
+layout: page
+title: Dokumentazioa
+---
 
 # **Erronka3.2**
 
@@ -12,9 +16,4 @@
 
 
 **Data:** 2026-02-26
-
-
-
-
-
 
