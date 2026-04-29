@@ -9,11 +9,8 @@ Erronkaren bigarren faseko helburu-nagusia datu-basea ingurune lokaletik hodeira
 
 # AURKIBIDEA
 
-1. [MongoDB Atlas](#1-MongoDB-Atlas)
-## Klusterra
-## Segurtasun neurriak
-## Grafikoak
-## Github-eko dokumentazioa
+1. [MongoDB Atlas](#1--mongodb-atlas)
+
 
 ### 1- MongoDB Atlas
 
