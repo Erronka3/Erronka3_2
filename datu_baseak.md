@@ -262,19 +262,20 @@ Sistemak automatikoki kalkulatzen ditu turismo estatistikak, orduko txostenak er
 # 3.2 stats_turism Taularen Egitura
 Taula honek datu agregatuak gordetzen ditu bulego eta ordu bakoitzeko:
 
-fecha_hora: Agregazioaren hasierako ordua.
+1-fecha_hora: Agregazioaren hasierako ordua.
 
-visitantes_max: Ordu horretako talderik handiena.
+2-visitantes_max: Ordu horretako talderik handiena.
 
-visitantes_min: Ordu horretako talderik txikiena.
+3-visitantes_min: Ordu horretako talderik txikiena.
 
-media_visitantes: Taldeen batezbesteko tamaina.
+4-media_visitantes: Taldeen batezbesteko tamaina.
 
-pais_mas_visitado: Ordu horretan bisitari gehien ekarri dituen herrialdea.
+5-pais_mas_visitado: Ordu horretan bisitari gehien ekarri dituen herrialdea.
 
-Honako irudian ikus daiteke taularen edukia datu historikoak txertatu ondoren:
+---
+![Captura 3](img/Datu%20base/S6.png)
 
-Irudia 3: stats_turism taularen edukia (duplikaturik gabe eta ordenatuta).
+
 
 # 3.3 MariaDB-ko Selectak
 
