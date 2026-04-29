@@ -33,7 +33,7 @@ stats_turism (Turismo Estatistikak): Bulego eta ordu bakoitzeko agregazioak (max
 
 Aurreko Erronkan erabilitako datu-basearen diseinua honako hau zen:
 
-![Captura sarrera](img/Markatze%20lengoaiak/sarrera.png)
+![Captura sarrera](img/Datu%20base/sarrera.png)
 
 Gaur egun, diseinua eguneratu da estatistiken taula berria integratzeko:
 
