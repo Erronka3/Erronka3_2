@@ -28,24 +28,28 @@ MongoDB atlas-eko webgunean kontu bat sortu dugu. Bertan, gure erronkako datu ba
 Behin, bietan datu basea konektatuta dagoela, mongoDB atlasean klusterra sortu dugu, bertan, MongoDB Compass-eko datu basea igoko dugu.
 
 ![captura 3](img/Digi/3.png)
-![captura 4](img/Digi/4.png)
+
 
 
 ### 3- Segurtasun neurriak 
 
 Horien artean, IP Whitlelist, horrela zein IP helbidetatik sartu daitekeen mugatzen da, bestalde, erabiltzaile rola ere zehazten da, erabiltzaile bakoitzari baimen zehatzak emanez (irakurri, idatzi, administratu...).
 
-![captura 5](img/Digi/5.png)
+![captura 4](img/Digi/4.png)
+
+
 
 
 Behin datuak hodeian ditugula, Adimen Artifiziala MongoDB Atlas-ean integratu digu. Datu-baseari gaitasun adimentsuak emateko, Atlas Vector Search konfiguratu dugu.
 
-![captura 6](img/Digi/6.png)
+![captura 5](img/Digi/5.png)
+
 
 ### 4- Grafikoak
 
 Datuak, informazio erabilgarria bihurtzeko irudi bisualak sortu ditugu, grafika ezberdinak sortuz. Hau lortzeko, MongoDB Atlas-ean Charts erabili dugu, honela, datu baseko informazio ezberdina grafika ezberdinetan irudikatu dezakegu.
 
+![captura 6](img/Digi/6.png)
 ![captura 7](img/Digi/7.png)
 ![captura 8](img/Digi/8.png)
 ![captura 9](img/Digi/9.png)
