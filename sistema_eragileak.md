@@ -146,6 +146,7 @@ Sistemaren errendimenduaren kudeaketa integrala CLI eta Web UI tresnak erabiliz.
 
 * **htop**: Terminal bidezko prozesuen monitorizazio azkarra.
 * **Cockpit**: Ostalariaren web-kontrol panela (`9090` portua).
+* **Netdata**: Monitorizazio metriko sakona denbora errealean. Hardwarearen eta Docker kontenedoreen egoera aztertzen du, alerta sistemarekin batera (`19999` portua).
 
 ```bash
 sudo apt install htop cockpit -y
