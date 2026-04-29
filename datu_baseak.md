@@ -92,7 +92,7 @@ db.tourist_office.aggregate([
 
 
 2. Asteko egunaren araberako estatistikak
-
+```javascript
 db.tourist_office.aggregate([
   {
     $project: {
@@ -109,10 +109,10 @@ db.tourist_office.aggregate([
   },
   { $sort: { _id: 1 } } // 1 (Igandea) - 7 (Larunbata)
 ])
-
+```
 
 3. Hilabeteko sasoiaren araberako azterketa (Spring vs Winter)
-
+```javascript
 db.tourist_office.aggregate([
   {
     $project: {
@@ -133,10 +133,10 @@ db.tourist_office.aggregate([
     }
   }
 ])
-
+```
 
 4. Ordu eta jatorriaren arteko konbinazioa
-
+```javascript
 db.tourist_office.aggregate([
   {
     $match: {
@@ -151,10 +151,10 @@ db.tourist_office.aggregate([
   },
   { $sort: { taldeak: -1 } }
 ])
-
+```
 
 5. Dataren araberako metrika konplexua: Goiztiarrak vs Berandu etorritakoak
-
+```javascript
 db.tourist_office.aggregate([
   {
     $project: {
@@ -171,9 +171,9 @@ db.tourist_office.aggregate([
     }
   }
 ])
-
+```
 6. unwind erabilera: Jatorrien zerrenda prozesatzen
-
+```javascript
 db.tourist_office.aggregate([
   { $project: { jatorri_zerrenda: ["$origin"], numberOfVisitors: 1 } }, 
   { $unwind: "$jatorri_zerrenda" },
@@ -184,10 +184,10 @@ db.tourist_office.aggregate([
     }
   }
 ])
-
+```
 
 7. Izenen transformazioa eta kalkuluak
-
+```javascript
 db.tourist_office.aggregate([
   {
     $project: {
@@ -199,10 +199,10 @@ db.tourist_office.aggregate([
   },
   { $limit: 5 }
 ])
-
+```
 
 8. Bulego bakoitzeko gailurra eta erregistroen arteko aldea
-
+```javascript
 db.tourist_office.aggregate([
   {
     $group: {
@@ -214,10 +214,10 @@ db.tourist_office.aggregate([
   },
   { $addFields: { aldea: { $subtract: ["$talde_handiena", "$talde_txikiena"] } } }
 ])
-
+```
 
 9. Jatorriaren araberako segmentazio matematikoa (Potentzia edo erro karratua)
-
+```javascript
 db.tourist_office.aggregate([
   {
     $group: {
@@ -232,10 +232,10 @@ db.tourist_office.aggregate([
     }
   }
 ])
-
+```
 
 10. Jatorri bakoitzeko bisitaririk gehieneko taldea 
-
+```javascript
 db.tourist_office.aggregate([
   {
     $group: {
@@ -254,7 +254,7 @@ db.tourist_office.aggregate([
   },
   { $sort: { talde_handiena: -1 } } 
 ])
-
+```
 Sistemak automatikoki kalkulatzen ditu turismo estatistikak, orduko txostenak errazteko.
 
 # 3.1. stats_turism Taularen Egitura
