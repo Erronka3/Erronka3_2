@@ -32,16 +32,21 @@ visits (Bisitak): Erregistro bakoitzak bisita talde bat adierazten du (data, per
 stats_turism (Turismo Estatistikak): Bulego eta ordu bakoitzeko agregazioak (max, min, avg) gordetzen dituen taula.
 
 Aurreko Erronkan erabilitako datu-basearen diseinua honako hau zen:
+![Captura 5](img/Datu%20base/Captura%20de%20pantalla%202026-04-29%20102956.png)
 
-![Captura sarrera](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102616.png)
 
 
 Gaur egun, diseinua eguneratu da estatistiken taula berria integratzeko:
 
-Irudia 2: Gaur egungo datu-basearen diseinu erlazionala.
+
+![Captura sarrera](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102616.png)
 
 2. Sinkronizazio Prozesua (ETL)
-Datuak Node.js script baten bidez migratzen dira MongoDBtik (iturburua) MariaDBra (helburua). Prozesu honek bi erronka nagusi konpondu ditu:
+Datuak Node.js script baten bidez migratzen dira MongoDBtik (iturburua) MariaDBra (helburua).
+![Captura 1](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102030.png)
+![Captura 2](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102114.png)
+![Captura 3](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102209.png)
+![Captura 4](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102244.png)
 
 2.1. Duplikatuak Saihestea
 Scriptak SQL SELECT kontsulta bat egiten du datu berri bakoitza txertatu aurretik. Datuak (bulegoa, jatorria, data eta pertsona kopurua) jada existitzen badira, ez dira berriro txertatzen. Honek datuen bikoizketa saihesten du sinkronizazio errepikakorretan.
