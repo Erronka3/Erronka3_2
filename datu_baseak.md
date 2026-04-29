@@ -9,15 +9,15 @@ title: Datu baseak
 Proiektu honek Gipuzkoako turismo bulegoetako datuak kudeatzeko sistema oso bat inplementatzen du. Sistema honek datuak iturri desberdinetatik (MongoDB) SQL datu-base zentralizatu batera (MariaDB) migratzea, estatistikak automatikoki kalkulatzea eta datuen osotasuna bermatzea ahalbidetzen du.
 
 # Aurkibidea
-Datu-basearen Diseinua (MariaDB)
+1.Datu-basearen Diseinua (MariaDB)
 
-Sinkronizazio Prozesua (ETL)
+2.Sinkronizazio Prozesua (ETL)
 
-Estatistikak eta Agregazioak
+3.Aggregateak, Selectak eta SQL-ko LABURPEN taula
 
-Prozesuen Automatizazioa eta Segurtasuna
+4.Prozesuen Automatizazioa eta Segurtasuna
 
-## 1. Datu-basearen Diseinua (MariaDB)
+# 1. Datu-basearen Diseinua (MariaDB)
 Sistemaren muina MariaDB SQL datu-basea da. Diseinua erlazionala da, datuen osotasuna bermatzeko eta erredundantzia minimizatzeko.
 
 ### Egitura 
@@ -41,23 +41,23 @@ Gaur egun, diseinua eguneratu da estatistiken taula berria integratzeko:
 
 ![Captura sarrera](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102616.png)
 
-## 2. Sinkronizazio Prozesua (ETL)
+# 2. Sinkronizazio Prozesua (ETL)
 
 Datuak Node.js script baten bidez migratzen dira MongoDBtik (iturburua) MariaDBra (helburua).Datu-baseak egun guztietako eta urte guztietako datuak alderatzea saihesteko, uneko ordua aurreko orduarekin alderatzen duen baldintza bat gehitu dugu; horrela, datuak orduz ordu soilik tratatuko ditugu, bestela datu-baseak ezingo bailioke epe luzera eutsi.
 ![Captura 1](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102030.png)
 
-# 2.1. Duplikatuak Saihestea eta Data eta Orduaren Zuzenketa
+## 2.1. Duplikatuak Saihestea eta Data eta Orduaren Zuzenketa
 
 Scriptak SQL SELECT kontsulta bat egiten du datu berri bakoitza txertatu aurretik. Datuak (bulegoa, jatorria, data eta pertsona kopurua) jada existitzen badira, ez dira berriro txertatzen. Honek datuen bikoizketa saihesten du sinkronizazio errepikakorretan. Gainera, MongoDBk datak ISO formatuan gordetzen ditu (UTC). Scriptak ordu hauek zuzentzen ditu MariaDBrekin bateragarria den formatura pasatzeko (YYYY-MM-DD HH:MM:SS) eta ordu-eremu lokalera egokitzeko.
 
 ![Captura 2](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102114.png)
 
-# 2.2 MariaDBrako Select eta Insert Into. 
+## 2.2 MariaDBrako Select eta Insert Into. 
 
 Scriptean select bat diseinatu dugu, SQL datu-basean gehitu nahi ditugun datu guztiak hartu eta MongoDBko datuekin erlazionatzen dituena; ondoren, datu horiek MariaDBko dagokion taulan (stats_turism) gehitzen dira Insert into baten bidez.
 ![Captura 3](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102209.png)
 
-# 2.3 Scriptaren Maiztasuna
+## 2.3 Scriptaren Maiztasuna
 "Aurreko zatian aipatu genuen bezala, gure scripta orduoro automatikoki exekutatzeko diseinatuta dago; horrela, azken orduko datuak soilik aztertzeko baldintza ere betetzen du, ahalik eta azkarren."
 ![Captura 4](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102244.png)
 
@@ -259,7 +259,7 @@ db.tourist_office.aggregate([
 ![Captura 3](img/Datu%20base/M10.png)
 Sistemak automatikoki kalkulatzen ditu turismo estatistikak, orduko txostenak errazteko.
 
-# 3.2 stats_turism Taularen Egitura
+## 3.2 stats_turism Taularen Egitura
 Taula honek datu agregatuak gordetzen ditu bulego eta ordu bakoitzeko:
 
 1-fecha_hora: Agregazioaren hasierako ordua.
@@ -277,7 +277,7 @@ Taula honek datu agregatuak gordetzen ditu bulego eta ordu bakoitzeko:
 
 
 
-# 3.3 MariaDB-ko Selectak
+## 3.3 MariaDB-ko Selectak
 
 Datu-basearen potentzia aprobetxatzeko, estatistika-taula eta taula erlazionalak uztartzen dituzten kontsulta aurreratuak diseinatu dira:
 
@@ -361,13 +361,13 @@ ORDER BY bisitariak_guztira DESC;
 ```
 ![Captura 3](img/Datu%20base/S5.png)
 
-## 4. Prozesuen Automatizazioa eta Segurtasuna
+# 4. Prozesuen Automatizazioa eta Segurtasuna
 Proiektuaren baldintzak betetzeko, automatizazio eta segurtasun plan bat diseinatu dugu
 
-# 4.1. Automatizazioa
+## 4.1. Automatizazioa
 Node.js scripta etengabe exekutatzen da atzealdean (Node-red --> MongoDB --> Script --> MariaDB), orduro sinkronizazioa eta estatistiken kalkulua egiteko.
 
-# 4.2. Datu-basearen Segurtasuna (Backups)
+## 4.2. Datu-basearen Segurtasuna (Backups)
 Datuak babesteko, automatizatutako backup sistema bat ezarri da mysqldump komandoa erabiliz.
 
 Inplementazioa (Windows .bat Scripta):
@@ -383,5 +383,3 @@ if not exist "%BACKUP_PATH%" mkdir "%BACKUP_PATH%"
 set FILENAME=%DB_NAME%_%date:~-4%%date:~3,2%%date:~0,2%_%time:~0,2%%time:~3,2%.sql
 "C:\xampp\mysql\bin\mysqldump.exe" -u %USER% --databases %DB_NAME% > "%BACKUP_PATH%\%FILENAME%"
 ```
-4.3. Estrategia Alternatiboen Azterketa
-mysqldump erabili ordez, Node.js scrip-a JSON fitxategiak esportatzeko konfigura daiteke. Estrategia hau aztertu da eta backup azkarrak egiteko edo datuak beste tresna batzuetara (Excel, adibidez) erraz eramateko baliagarria dela ondorioztatu da.
