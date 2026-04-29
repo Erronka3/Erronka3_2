@@ -20,17 +20,12 @@ Erronkaren bigarren faseko helburu-nagusia datu-basea ingurune lokaletik hodeira
 
 MongoDB atlas-eko webgunean kontu bat sortu dugu. Bertan, gure erronkako datu basea MongoDB lokaletik Cloud zerbitzu batera migratu dugu. Horretarako, mongoDB compass-ean datu basea importatu eta ondoren hori, atlasarekin konektatuz. Honek, gure datuak hodeian gordetzeko aukera ematen digu.
 
-![repositorio](img/repositorio.png)
 
-![repositorio](img/repositorio.png)
 
 ### 2- Klusterra
 
 Behin, bietan datu basea konektatuta dagoela, mongoDB atlasean klusterra sortu dugu, bertan, MongoDB Compass-eko datu basea igoko dugu.
 
-![repositorio](img/repositorio.png)
-![repositorio](img/repositorio.png)
-![repositorio](img/repositorio.png)
 
 ### 3- Segurtasun neurriak 
 
@@ -46,6 +41,6 @@ Datuak, informazio erabilgarria bihurtzeko irudi bisualak sortu ditugu, grafika 
 
 Bukatzeko, dokumentazio hau sortu ahal izateko github-en repositorio bat sortu dugu.
 
-![repositorio](img/repositorio.png)
+
 
 Repositorio barruan, hainbat artxibo/karpeta sartu ditugu, modulo bakoitzeko ezberdin bat sortuz, modu horretara dokumentazioa webgunean erakusterako orduan bakoitza orri ezberdin batean azalduko da. 
