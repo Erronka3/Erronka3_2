@@ -2,7 +2,7 @@
 layout: page
 title: Sistema Eragileak
 ---
-# 🚀 Erronka Proiektua: Debian Zerbitzariaren Monitorizazioa eta Kudeaketa
+#  Erronka Proiektua: Debian Zerbitzariaren Monitorizazioa eta Kudeaketa
 
 ![Debian](https://img.shields.io/badge/Debian-12-A81D33?style=for-the-badge&logo=debian&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
@@ -13,7 +13,7 @@ Repositorio honek **Debian 12** zerbitzari baten konfigurazio-scriptak eta dokum
 
 ---
 
-## 📋 Edukien Aurkibidea
+##  Edukien Aurkibidea
 
 1. [Erabiltzaileen Kudeaketa](#1-erabiltzaileen-kudeaketa)
 2. [RAID-aren Konfigurazioa eta Muntaketa](#2-raid-aren-konfigurazioa-eta-muntaketa)
@@ -31,14 +31,20 @@ Repositorio honek **Debian 12** zerbitzari baten konfigurazio-scriptak eta dokum
 Sistemarako sarbidea kontrolatzeko, erabiltzaile lokalak sortu dira eta baimen egokiak esleitu zaizkie.
 
 ```bash
+# Talde berria sortu (adibidez, 'garatzaileak')
+sudo groupadd garatzaileak
+
 # Erabiltzaile berria sortu (adibidez, 'jokin')
 sudo adduser jokin
+
+# Erabiltzailea sortutako taldera gehitu
+sudo usermod -aG garatzaileak jokin
 
 # Erabiltzaileari administratzaile baimenak eman (sudo taldera gehitu)
 sudo usermod -aG sudo jokin
 
-# Erabiltzaileak ondo sortu direla egiaztatu
-cat /etc/passwd | grep jokin
+# Taldeak eta erabiltzaileak ondo sortu direla egiaztatu
+groups jokin
 ```
 
 ---
