@@ -20,6 +20,7 @@ Erronkaren bigarren faseko helburu-nagusia datu-basea ingurune lokaletik hodeira
 
 MongoDB atlas-eko webgunean kontu bat sortu dugu. Bertan, gure erronkako datu basea MongoDB lokaletik Cloud zerbitzu batera migratu dugu. Horretarako, mongoDB compass-ean datu basea importatu eta ondoren hori, atlasarekin konektatuz. Honek, gure datuak hodeian gordetzeko aukera ematen digu.
 
+![captura 1](img/Digi/1.png)
 
 
 ### 2- Klusterra
