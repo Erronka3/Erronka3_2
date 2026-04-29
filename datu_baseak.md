@@ -10,10 +10,10 @@ Proiektu honek Gipuzkoako turismo bulegoetako datuak kudeatzeko sistema oso bat 
 
 # Aurkibidea
 
-1. [Datu-basearen Diseinua (MariaDB)](#1.-datu-basearen-diseinua-(mariadb))
-2. [Sinkronizazio Prozesua (ETL)](#2.-sinkronizazio-prozesua (ETL))
-3. [Aggregateak, Selectak eta SQL-ko LABURPEN taula](#3.-aggregateak,-selectak-eta-sql-ko-laburpen-taula)
-4. [Prozesuen Automatizazioa eta Segurtasuna](#4.-prozesuen-automatizazioa-eta-segurtasuna)
+1. [Datu-basearen Diseinua (MariaDB)](#1-datu-basearen-diseinua-mariadb)
+2. [Sinkronizazio Prozesua (ETL)](#2-sinkronizazio-prozesua-ETL)
+3. [Aggregateak, Selectak eta SQL-ko LABURPEN taula](#3-aggregateak,-selectak-eta-sql-ko-laburpen-taula)
+4. [Prozesuen Automatizazioa eta Segurtasuna](#4-prozesuen-automatizazioa-eta-segurtasuna)
 
 
 # 1. Datu-basearen Diseinua (MariaDB)
