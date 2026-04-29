@@ -65,7 +65,193 @@ Scriptean select bat diseinatu dugu, SQL datu-basean gehitu nahi ditugun datu gu
 
 
 
-## 3. Estatistikak eta Agregazioak
+## 3. MongoDB-ko aggregateak
+MongoDB aggregates:
+
+1. Bisitari kopurua ordu-tarteka (Data funtzioak erabiliz)
+
+db.tourist_office.aggregate([
+{
+   $project: {
+      ordua: { $hour: "$timestamp" },
+      numberOfVisitors: 1
+    }
+  },
+  {
+    $group: {
+      _id: "$ordua",
+      bisitariak_guztira: { $sum: "$numberOfVisitors" }
+    }
+  },
+  { $sort: { _id: 1 } }
+])
+
+
+
+2. Asteko egunaren araberako estatistikak
+
+db.tourist_office.aggregate([
+  {
+    $project: {
+      asteko_eguna: { $dayOfWeek: "$timestamp" },
+      numberOfVisitors: 1
+    }
+  },
+  {
+    $group: {
+      _id: "$asteko_eguna",
+      bisita_kopurua: { $sum: 1 },
+      batezbesteko_taldea: { $avg: "$numberOfVisitors" }
+    }
+  },
+  { $sort: { _id: 1 } } // 1 (Igandea) - 7 (Larunbata)
+])
+
+
+3. Hilabeteko sasoiaren araberako azterketa (Spring vs Winter)
+
+db.tourist_office.aggregate([
+  {
+    $project: {
+      sasoia: {
+        $cond: {
+          if: { $in: [{ $month: "$timestamp" }, [3, 4, 5]] },
+          then: "Spring",
+          else: "Other Season"
+        }
+      },
+      numberOfVisitors: 1
+    }
+  },
+  {
+    $group: {
+      _id: "$sasoia",
+      pertsona_kopurua: { $sum: "$numberOfVisitors" }
+    }
+  }
+])
+
+
+4. Ordu eta jatorriaren arteko konbinazioa
+
+db.tourist_office.aggregate([
+  {
+    $match: {
+      $expr: { $gte: [{ $hour: "$timestamp" }, 10] }
+    }
+  },
+  {
+    $group: {
+      _id: "$origin",
+      taldeak: { $sum: 1 }
+    }
+  },
+  { $sort: { taldeak: -1 } }
+])
+
+
+5. Dataren araberako metrika konplexua: Goiztiarrak vs Berandu etorritakoak
+
+db.tourist_office.aggregate([
+  {
+    $project: {
+      momentua: {
+        $cond: [{ $lt: [{ $hour: "$timestamp" }, 12] }, "Goizez", "Arratsaldez"]
+      },
+      numberOfVisitors: 1
+    }
+  },
+  {
+    $group: {
+      _id: "$momentua",
+      guztira: { $sum: "$numberOfVisitors" }
+    }
+  }
+])
+
+6. unwind erabilera: Jatorrien zerrenda prozesatzen
+
+db.tourist_office.aggregate([
+  { $project: { jatorri_zerrenda: ["$origin"], numberOfVisitors: 1 } }, 
+  { $unwind: "$jatorri_zerrenda" },
+  {
+    $group: {
+      _id: "$jatorri_zerrenda",
+      bisita_kopurua: { $sum: 1 }
+    }
+  }
+])
+
+
+7. Izenen transformazioa eta kalkuluak
+
+db.tourist_office.aggregate([
+  {
+    $project: {
+      _id: 0,
+      herrialdea: { $toUpper: "$origin" },
+      bulego_zenbakia: "$officeNumber",
+      gastu_estimatua: { $multiply: ["$numberOfVisitors", 50] } 
+    }
+  },
+  { $limit: 5 }
+])
+
+
+8. Bulego bakoitzeko gailurra eta erregistroen arteko aldea
+
+db.tourist_office.aggregate([
+  {
+    $group: {
+      _id: "$officeNumber",
+      talde_handiena: { $max: "$numberOfVisitors" },
+      talde_txikiena: { $min: "$numberOfVisitors" },
+      guztira: { $sum: "$numberOfVisitors" }
+    }
+  },
+  { $addFields: { aldea: { $subtract: ["$talde_handiena", "$talde_txikiena"] } } }
+])
+
+
+9. Jatorriaren araberako segmentazio matematikoa (Potentzia edo erro karratua)
+
+db.tourist_office.aggregate([
+  {
+    $group: {
+      _id: "$origin",
+      batezbestekoa: { $avg: "$numberOfVisitors" }
+    }
+  },
+  {
+    $project: {
+      _id: 1,
+      balio_estatistikoa: { $sqrt: "$batezbestekoa" }
+    }
+  }
+])
+
+
+10. Jatorri bakoitzeko bisitaririk gehieneko taldea 
+
+db.tourist_office.aggregate([
+  {
+    $group: {
+      _id: "$origin",
+      talde_handiena: { $max: "$numberOfVisitors" },
+      batezbestekoa: { $avg: "$numberOfVisitors" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,                   
+      herrialdea: "$_id",       
+      talde_handiena: 1,
+      batezbestekoa: { $round: ["$batezbestekoa", 1] } 
+    }
+  },
+  { $sort: { talde_handiena: -1 } } 
+])
+
 Sistemak automatikoki kalkulatzen ditu turismo estatistikak, orduko txostenak errazteko.
 
 # 3.1. stats_turism Taularen Egitura
