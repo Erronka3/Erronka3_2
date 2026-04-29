@@ -2,7 +2,7 @@
 layout: page
 title: Sistema Eragileak
 ---
-# 🚀 Erronka Proiektua: Debian Zerbitzariaren Monitorizazioa eta Kudeaketa
+#  Erronka Proiektua: Debian Zerbitzariaren Monitorizazioa eta Kudeaketa
 
 ![Debian](https://img.shields.io/badge/Debian-12-A81D33?style=for-the-badge&logo=debian&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
@@ -13,7 +13,7 @@ Repositorio honek **Debian 12** zerbitzari baten konfigurazio-scriptak eta dokum
 
 ---
 
-## 📋 Edukien Aurkibidea
+##  Edukien Aurkibidea
 
 1. [Urruneko Sarbide Grafikoa (XRDP)](#1-urruneko-sarbide-grafikoa-xrdp)
 2. [Samba eta Disko-kuotak](#2-samba-eta-disko-kuotak)
