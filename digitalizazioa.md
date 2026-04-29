@@ -3,9 +3,11 @@ layout: page
 title: Digitalizazioa
 ---
 
-
+---
 
 Erronkaren bigarren faseko helburu-nagusia datu-basea ingurune lokaletik hodeira (Cloud) migratzea da, MongoDB Atlas zerbitzua erabiliz, eta ondoren, adimen artifiziala eta datuen bistaratzea lantzea da.
+
+---
 
 # AURKIBIDEA
 
@@ -15,6 +17,7 @@ Erronkaren bigarren faseko helburu-nagusia datu-basea ingurune lokaletik hodeira
 4. [Grafikoak](#4--grafikoak)
 5. [Github-eko dokumentazioa](#5--github-eko-dokumentazioa)
 
+---
 
 ### 1- MongoDB Atlas
 
@@ -23,13 +26,15 @@ MongoDB atlas-eko webgunean kontu bat sortu dugu. Bertan, gure erronkako datu ba
 ![captura 1](img/Digi/1.png)
 ![captura 2](img/Digi/2.png)
 
+---
+
 ### 2- Klusterra
 
 Behin, bietan datu basea konektatuta dagoela, mongoDB atlasean klusterra sortu dugu, bertan, MongoDB Compass-eko datu basea igoko dugu.
 
 ![captura 3](img/Digi/3.png)
 
-
+---
 
 ### 3- Segurtasun neurriak 
 
@@ -37,13 +42,11 @@ Horien artean, IP Whitlelist, horrela zein IP helbidetatik sartu daitekeen mugat
 
 ![captura 4](img/Digi/4.png)
 
-
-
-
 Behin datuak hodeian ditugula, Adimen Artifiziala MongoDB Atlas-ean integratu digu. Datu-baseari gaitasun adimentsuak emateko, Atlas Vector Search konfiguratu dugu.
 
 ![captura 5](img/Digi/5.png)
 
+---
 
 ### 4- Grafikoak
 
@@ -53,6 +56,9 @@ Datuak, informazio erabilgarria bihurtzeko irudi bisualak sortu ditugu, grafika 
 ![captura 7](img/Digi/7.png)
 ![captura 8](img/Digi/8.png)
 ![captura 9](img/Digi/9.png)
+
+Hona hemen sortutako hainbat grafiko:
+
 ![captura 10](img/Digi/10.png)
 ![captura 11](img/Digi/11.png)
 ![captura 12](img/Digi/12.png)
@@ -61,9 +67,13 @@ Datuak, informazio erabilgarria bihurtzeko irudi bisualak sortu ditugu, grafika 
 ![captura 15](img/Digi/15.png)
 ![captura 16](img/Digi/16.png)
 
+---
+
 ## 5- GITHUB-EKO DOKUMENTAZIOA
 
-Bukatzeko, dokumentazio hau sortu ahal izateko github-en repositorio bat sortu dugu.
+Amaitzeko, dokumentazio hau sortu ahal izateko github-en repositorio bat sortu dugu.
 Repositorio barruan, hainbat artxibo/karpeta sartu ditugu, modulo bakoitzeko ezberdin bat sortuz, modu horretara dokumentazioa webgunean erakusterako orduan bakoitza orri ezberdin batean azalduko da.
 
 ![captura 17](img/Digi/17.png)
+
+---
