@@ -65,7 +65,7 @@ Scriptean select bat diseinatu dugu, SQL datu-basean gehitu nahi ditugun datu gu
 
 
 
-## 3. MongoDB-ko aggregateak
+## 3.1 MongoDB-ko aggregateak
 MongoDB aggregates:
 
 1. Bisitari kopurua ordu-tarteka (Data funtzioak erabiliz)
@@ -258,8 +258,90 @@ db.tourist_office.aggregate([
 ```
 ![Captura 3](img/Datu%20base/M10.png)
 Sistemak automatikoki kalkulatzen ditu turismo estatistikak, orduko txostenak errazteko.
+# 3.2 MariaDB-ko Selectak
 
-# 3.1. stats_turism Taularen Egitura
+Datu-basearen potentzia aprobetxatzeko, estatistika-taula eta taula erlazionalak uztartzen dituzten kontsulta aurreratuak diseinatu dira:
+
+1. Batez besteko orokorraren gainetik dauden bulegoen sailkapena
+Kontsulta honek azpikontsulta bat erabiltzen du batez besteko globala kalkulatzeko eta bulego bakoitzaren errendimenduarekin alderatzeko.
+
+```SQL
+/* Batez besteko orokorra baino bisitari gehiago dituzten bulegoak hautatzen ditu */
+SELECT 
+    o.nombre AS bulegoa, 
+    st.media_visitantes, 
+    st.fecha_hora
+FROM stats_turism st
+JOIN offices o ON st.office_id = o.id
+WHERE st.media_visitantes > (
+    SELECT AVG(media_visitantes) 
+    FROM stats_turism
+)
+ORDER BY st.media_visitantes DESC;
+```
+2. Probintziako bisitari errekorra duen herrialdea
+Lau taula lotzen ditu (provincias, offices, stats_turism) lurralde bakoitzean bisitari kopuru handiena (visitantes_max) ekarri duen herrialdea identifikatzeko.
+
+```SQL
+/* Probintzia bakoitzean bisitari-punturik altuena eman duen herrialdea erakusten du */
+SELECT 
+    p.nombre AS probintzia, 
+    o.nombre AS bulegoa, 
+    st.pais_mas_visitado, 
+    MAX(st.visitantes_max) AS bisitari_errekorra
+FROM stats_turism st
+JOIN offices o ON st.office_id = o.id
+JOIN provincias p ON o.provincia_id = p.id
+GROUP BY p.nombre, o.nombre
+ORDER BY bisitari_errekorra DESC;
+```
+3. "Ordu Kritikoen" detekzioa (Bisitari tarte handia)
+Ordu berean jaso den talde handienaren eta txikienaren arteko aldea kalkulatzen du. Lan-karga bat-batekoak detektatzeko oso erabilgarria da.
+
+```SQL
+/* Gehienezko eta gutxieneko bisitarien arteko aldea 10 pertsona baino handiagoa denean bistaratzen du */
+SELECT 
+    fecha_hora, 
+    office_id, 
+    visitantes_max, 
+    visitantes_min,
+    (visitantes_max - visitantes_min) AS pertsona_aldea,
+    media_visitantes
+FROM stats_turism
+WHERE (visitantes_max - visitantes_min) > 10
+ORDER BY pertsona_aldea DESC;
+```
+4. Bulegoen egoera eguneratua (LEFT JOIN)
+LEFT JOIN erabiltzeak aukera ematen du bulego guztiak ikusteko, baita azken orduan bisitaririk jaso ez dutenak ere (hauek "Daturik gabe" gisa agertuko dira).
+
+```SQL
+/* Bulego guztien zerrenda eta azken orduko jarduera, hutsik daudenak baztertu gabe */
+SELECT 
+    o.nombre AS bulegoa, 
+    IFNULL(st.pais_mas_visitado, 'Daturik gabe') AS herrialde_nagusia,
+    IFNULL(st.media_visitantes, 0) AS orduko_batezbestekoa
+FROM offices o
+LEFT JOIN stats_turism st ON o.id = st.office_id 
+    AND st.fecha_hora >= NOW() - INTERVAL 1 HOUR
+ORDER BY orduko_batezbestekoa DESC;
+```
+5. Jatorriaren araberako analisi historiko metatua
+Estatistikako taula erabili beharrean, visits eta origins taula erlazionaletara jotzen du herrialde bakoitzeko metatu historiko osoa kalkulatzeko.
+
+```SQL
+/* Herrialde bakoitzetik etorritako bisitari guztiak batzen ditu historikoki */
+SELECT 
+    ori.nombre AS jatorrizko_herrialdea, 
+    COUNT(v.id) AS talde_kopurua, 
+    SUM(v.number_of_visitors) AS bisitariak_guztira,
+    ROUND(AVG(v.number_of_visitors), 2) AS taldeko_batezbestekoa
+FROM visits v
+JOIN origins ori ON v.origin_id = ori.id
+GROUP BY ori.nombre
+HAVING bisitariak_guztira > 0
+ORDER BY bisitariak_guztira DESC;
+```
+# 3.1 stats_turism Taularen Egitura
 Taula honek datu agregatuak gordetzen ditu bulego eta ordu bakoitzeko:
 
 fecha_hora: Agregazioaren hasierako ordua.
