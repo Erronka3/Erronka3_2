@@ -89,7 +89,7 @@ db.tourist_office.aggregate([
   }
 ])
 ```
-
+![Captura 3](img/Datu%20base/M1.png)
 
 2. Asteko egunaren araberako estatistikak
 ```javascript
@@ -110,7 +110,7 @@ db.tourist_office.aggregate([
   { $sort: { _id: 1 } } // 1 (Igandea) - 7 (Larunbata)
 ])
 ```
-
+![Captura 3](img/Datu%20base/M2.png)
 3. Hilabeteko sasoiaren araberako azterketa (Spring vs Winter)
 ```javascript
 db.tourist_office.aggregate([
@@ -134,7 +134,7 @@ db.tourist_office.aggregate([
   }
 ])
 ```
-
+![Captura 3](img/Datu%20base/M3.png)
 4. Ordu eta jatorriaren arteko konbinazioa
 ```javascript
 db.tourist_office.aggregate([
@@ -152,7 +152,7 @@ db.tourist_office.aggregate([
   { $sort: { taldeak: -1 } }
 ])
 ```
-
+![Captura 3](img/Datu%20base/M4.png)
 5. Dataren araberako metrika konplexua: Goiztiarrak vs Berandu etorritakoak
 ```javascript
 db.tourist_office.aggregate([
@@ -172,6 +172,7 @@ db.tourist_office.aggregate([
   }
 ])
 ```
+![Captura 3](img/Datu%20base/M5.png)
 6. unwind erabilera: Jatorrien zerrenda prozesatzen
 ```javascript
 db.tourist_office.aggregate([
@@ -185,7 +186,7 @@ db.tourist_office.aggregate([
   }
 ])
 ```
-
+![Captura 3](img/Datu%20base/M6.png)
 7. Izenen transformazioa eta kalkuluak
 ```javascript
 db.tourist_office.aggregate([
@@ -200,7 +201,7 @@ db.tourist_office.aggregate([
   { $limit: 5 }
 ])
 ```
-
+![Captura 3](img/Datu%20base/M7.png)
 8. Bulego bakoitzeko gailurra eta erregistroen arteko aldea
 ```javascript
 db.tourist_office.aggregate([
@@ -215,7 +216,7 @@ db.tourist_office.aggregate([
   { $addFields: { aldea: { $subtract: ["$talde_handiena", "$talde_txikiena"] } } }
 ])
 ```
-
+![Captura 3](img/Datu%20base/M8.png)
 9. Jatorriaren araberako segmentazio matematikoa (Potentzia edo erro karratua)
 ```javascript
 db.tourist_office.aggregate([
@@ -233,7 +234,7 @@ db.tourist_office.aggregate([
   }
 ])
 ```
-
+![Captura 3](img/Datu%20base/M9.png)
 10. Jatorri bakoitzeko bisitaririk gehieneko taldea 
 ```javascript
 db.tourist_office.aggregate([
@@ -255,6 +256,7 @@ db.tourist_office.aggregate([
   { $sort: { talde_handiena: -1 } } 
 ])
 ```
+![Captura 3](img/Datu%20base/M10.png)
 Sistemak automatikoki kalkulatzen ditu turismo estatistikak, orduko txostenak errazteko.
 
 # 3.1. stats_turism Taularen Egitura
