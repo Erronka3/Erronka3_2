@@ -31,7 +31,7 @@ Behin, bietan datu basea konektatuta dagoela, mongoDB atlasean klusterra sortu d
 
 Horien artean, IP Whitlelist, horrela zein IP helbidetatik sartu daitekeen mugatzen da, bestalde, erabiltzaile rola ere zehazten da, erabiltzaile bakoitzari baimen zehatzak emanez (irakurri, idatzi, administratu...).
 
-Behin datuak hodeian ditugula, Adimen Artifiziala MongoDB Atlas-ean integratu digu.
+Behin datuak hodeian ditugula, Adimen Artifiziala MongoDB Atlas-ean integratu digu. Datu-baseari gaitasun adimentsuak emateko, Atlas Vector Search konfiguratu dugu.
 
 ### 4- Grafikoak
 
