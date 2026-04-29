@@ -71,8 +71,8 @@ MongoDB aggregates:
 1. Bisitari kopurua ordu-tarteka (Data funtzioak erabiliz)
 
 db.tourist_office.aggregate([
-{
-   $project: {
+  {
+    $project: {
       ordua: { $hour: "$timestamp" },
       numberOfVisitors: 1
     }
