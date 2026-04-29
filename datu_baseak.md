@@ -5,10 +5,10 @@ title: Datu baseak
 
 
 
-TurisGipuzkoa: Datu-baseen Sinkronizazioa eta Kudeaketa Sistema
+# TurisGipuzkoa: Datu-baseen Sinkronizazioa eta Kudeaketa Sistema
 Proiektu honek Gipuzkoako turismo bulegoetako datuak kudeatzeko sistema oso bat inplementatzen du. Sistema honek datuak iturri desberdinetatik (MongoDB) SQL datu-base zentralizatu batera (MariaDB) migratzea, estatistikak automatikoki kalkulatzea eta datuen osotasuna bermatzea ahalbidetzen du.
 
-Aurkibidea
+# Aurkibidea
 Datu-basearen Diseinua (MariaDB)
 
 Sinkronizazio Prozesua (ETL)
@@ -17,7 +17,7 @@ Estatistikak eta Agregazioak
 
 Prozesuen Automatizazioa eta Segurtasuna
 
-1. Datu-basearen Diseinua (MariaDB)
+## 1. Datu-basearen Diseinua (MariaDB)
 Sistemaren muina MariaDB SQL datu-basea da. Diseinua erlazionala da, datuen osotasuna bermatzeko eta erredundantzia minimizatzeko.
 
 Egitura Euskaraz
@@ -41,23 +41,23 @@ Gaur egun, diseinua eguneratu da estatistiken taula berria integratzeko:
 
 ![Captura sarrera](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102616.png)
 
-2. Sinkronizazio Prozesua (ETL)
+## 2. Sinkronizazio Prozesua (ETL)
 Datuak Node.js script baten bidez migratzen dira MongoDBtik (iturburua) MariaDBra (helburua).
 ![Captura 1](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102030.png)
 ![Captura 2](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102114.png)
 ![Captura 3](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102209.png)
 ![Captura 4](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102244.png)
 
-2.1. Duplikatuak Saihestea
+# 2.1. Duplikatuak Saihestea
 Scriptak SQL SELECT kontsulta bat egiten du datu berri bakoitza txertatu aurretik. Datuak (bulegoa, jatorria, data eta pertsona kopurua) jada existitzen badira, ez dira berriro txertatzen. Honek datuen bikoizketa saihesten du sinkronizazio errepikakorretan.
 
-2.2. Data eta Orduaren Zuzenketa
+# 2.2. Data eta Orduaren Zuzenketa
 MongoDBk datak ISO formatuan gordetzen ditu (UTC). Scriptak ordu hauek zuzentzen ditu MariaDBrekin bateragarria den formatura pasatzeko (YYYY-MM-DD HH:MM:SS) eta ordu-eremu lokalera egokitzeko.
 
-3. Estatistikak eta Agregazioak
+## 3. Estatistikak eta Agregazioak
 Sistemak automatikoki kalkulatzen ditu turismo estatistikak, orduko txostenak errazteko.
 
-3.1. stats_turism Taularen Egitura
+# 3.1. stats_turism Taularen Egitura
 Taula honek datu agregatuak gordetzen ditu bulego eta ordu bakoitzeko:
 
 fecha_hora: Agregazioaren hasierako ordua.
@@ -74,16 +74,16 @@ Honako irudian ikus daiteke taularen edukia datu historikoak txertatu ondoren:
 
 Irudia 3: stats_turism taularen edukia (duplikaturik gabe eta ordenatuta).
 
-3.2. Eagregazio Loka (Scripta)
+# 3.2. Eagregazio Loka (Scripta)
 Node.js scripta eguneratu da sinkronizazio bakoitzean estatistikak kalkulatzeko. INSERT ... ON DUPLICATE KEY UPDATE sintaxia erabiltzen da: ordu horretako estatistikak jada existitzen badira, eguneratu egiten dira; bestela, txertatu.
 
-4. Prozesuen Automatizazioa eta Segurtasuna
+## 4. Prozesuen Automatizazioa eta Segurtasuna
 Proiektuaren baldintzak betetzeko, automatizazio eta segurtasun plan bat diseinatu da, Word dokumentuko baldintzak jarraituz.
 
-4.1. Automatizazioa
+# 4.1. Automatizazioa
 Node.js scripta etengabe exekutatzen da atzealdean (PM2 bezalako tresnekin edo Windows Task Scheduler-ekin), 10 segundoro (edo konfiguratutako denboran) sinkronizazioa eta estatistiken kalkulua egiteko.
 
-4.2. Datu-basearen Segurtasuna (Backups)
+# 4.2. Datu-basearen Segurtasuna (Backups)
 Datuak babesteko, automatizatutako backup sistema bat ezarri da mysqldump komandoa erabiliz.
 
 Irudia 4: Word dokumentuko backup-ak egiteko baldintzak (euskaraz).
