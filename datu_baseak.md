@@ -9,13 +9,12 @@ title: Datu baseak
 Proiektu honek Gipuzkoako turismo bulegoetako datuak kudeatzeko sistema oso bat inplementatzen du. Sistema honek datuak iturri desberdinetatik (MongoDB) SQL datu-base zentralizatu batera (MariaDB) migratzea, estatistikak automatikoki kalkulatzea eta datuen osotasuna bermatzea ahalbidetzen du.
 
 # Aurkibidea
-1.Datu-basearen Diseinua (MariaDB)
 
-2.Sinkronizazio Prozesua (ETL)
+1. [Datu-basearen Diseinua (MariaDB)](#1--datu-basearen-diseinua-(mariadb))
+2. [Sinkronizazio Prozesua (ETL)](#2--sinkronizazio-prozesua (ETL))
+3. [Aggregateak, Selectak eta SQL-ko LABURPEN taula](#3--aggregateak,-selectak-eta-sql-ko-laburpen-taula)
+4. [Prozesuen Automatizazioa eta Segurtasuna](#4--prozesuen-automatizazioa-eta-segurtasuna)
 
-3.Aggregateak, Selectak eta SQL-ko LABURPEN taula
-
-4.Prozesuen Automatizazioa eta Segurtasuna
 
 # 1. Datu-basearen Diseinua (MariaDB)
 Sistemaren muina MariaDB SQL datu-basea da. Diseinua erlazionala da, datuen osotasuna bermatzeko eta erredundantzia minimizatzeko.
