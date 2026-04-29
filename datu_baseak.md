@@ -70,6 +70,7 @@ MongoDB aggregates:
 
 1. Bisitari kopurua ordu-tarteka (Data funtzioak erabiliz)
 
+```javascript
 db.tourist_office.aggregate([
   {
     $project: {
@@ -83,9 +84,11 @@ db.tourist_office.aggregate([
       bisitariak_guztira: { $sum: "$numberOfVisitors" }
     }
   },
-  { $sort: { _id: 1 } }
+  {
+    $sort: { _id: 1 }
+  }
 ])
-
+```
 
 
 2. Asteko egunaren araberako estatistikak
