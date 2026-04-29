@@ -6,7 +6,7 @@ title: Datu baseak
 
 
 # TurisGipuzkoa: Datu-baseen Sinkronizazioa eta Kudeaketa Sistema
-Proiektu honek Gipuzkoako turismo bulegoetako datuak kudeatzeko sistema oso bat inplementatzen du. Sistema honek datuak iturri desberdinetatik (MongoDB) SQL datu-base zentralizatu batera (MariaDB) migratzea, estatistikak automatikoki kalkulatzea eta datuen osotasuna bermatzea ahalbidetzen du.
+Proiektu honek turismo bulegoetako datuak kudeatzeko sistema oso bat inplementatzen du. Sistema honek datuak iturri desberdinetatik (MongoDB) SQL datu-base zentralizatu batera (MariaDB) migratzea, estatistikak automatikoki kalkulatzea eta datuen osotasuna bermatzea ahalbidetzen du.
 
 # Aurkibidea
 
