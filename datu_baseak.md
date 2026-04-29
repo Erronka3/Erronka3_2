@@ -20,16 +20,16 @@ Prozesuen Automatizazioa eta Segurtasuna
 ## 1. Datu-basearen Diseinua (MariaDB)
 Sistemaren muina MariaDB SQL datu-basea da. Diseinua erlazionala da, datuen osotasuna bermatzeko eta erredundantzia minimizatzeko.
 
-Egitura Euskaraz
-provincias (Probintziak): Probintzien izenak gordetzen ditu.
+### Egitura 
+1- provincias (Probintziak): Bulego bakoitzeko probintzien izenak gordetzen ditu.
 
-offices (Bulegoak): Turismo bulegoak identifikatzen ditu eta probintzia bati lotzen dizkio.
+2- offices (Bulegoak): Turismo bulegoak identifikatzen ditu eta probintzia bati lotzen dizkio.
 
-origins (Jatorriak): Bisitarien jatorrizko herrialde edo eskualdeen zerrenda.
+3- origins (Jatorriak): Bisitarien jatorrizko herrialde edo eskualdeen zerrenda.
 
-visits (Bisitak): Erregistro bakoitzak bisita talde bat adierazten du (data, pertsona kopurua, jatorria eta bulegoa).
+4- visits (Bisitak): Erregistro bakoitzak bisita talde bat adierazten du (data, pertsona kopurua, jatorria eta bulegoa).
 
-stats_turism (Turismo Estatistikak): Bulego eta ordu bakoitzeko agregazioak (max, min, avg) gordetzen dituen taula.
+5- stats_turism (Turismo Estatistikak): Bulego eta ordu bakoitzeko agregazioak (max, min, avg) gordetzen dituen taula.
 
 Aurreko Erronkan erabilitako datu-basearen diseinua honako hau zen:
 ![Captura 5](img/Datu%20base/Captura%20de%20pantalla%202026-04-29%20102956.png)
@@ -42,17 +42,28 @@ Gaur egun, diseinua eguneratu da estatistiken taula berria integratzeko:
 ![Captura sarrera](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102616.png)
 
 ## 2. Sinkronizazio Prozesua (ETL)
-Datuak Node.js script baten bidez migratzen dira MongoDBtik (iturburua) MariaDBra (helburua).
+
+Datuak Node.js script baten bidez migratzen dira MongoDBtik (iturburua) MariaDBra (helburua).Datu-baseak egun guztietako eta urte guztietako datuak alderatzea saihesteko, uneko ordua aurreko orduarekin alderatzen duen baldintza bat gehitu dugu; horrela, datuak orduz ordu soilik tratatuko ditugu, bestela datu-baseak ezingo bailioke epe luzera eutsi.
 ![Captura 1](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102030.png)
+
+# 2.1. Duplikatuak Saihestea eta Data eta Orduaren Zuzenketa
+
+Scriptak SQL SELECT kontsulta bat egiten du datu berri bakoitza txertatu aurretik. Datuak (bulegoa, jatorria, data eta pertsona kopurua) jada existitzen badira, ez dira berriro txertatzen. Honek datuen bikoizketa saihesten du sinkronizazio errepikakorretan. Gainera, MongoDBk datak ISO formatuan gordetzen ditu (UTC). Scriptak ordu hauek zuzentzen ditu MariaDBrekin bateragarria den formatura pasatzeko (YYYY-MM-DD HH:MM:SS) eta ordu-eremu lokalera egokitzeko.
+
 ![Captura 2](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102114.png)
+
+# 2.2 MariaDBrako Select eta Insert Into. 
+
+Scriptean select bat diseinatu dugu, SQL datu-basean gehitu nahi ditugun datu guztiak hartu eta MongoDBko datuekin erlazionatzen dituena; ondoren, datu horiek MariaDBko dagokion taulan (stats_turism) gehitzen dira Insert into baten bidez.
 ![Captura 3](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102209.png)
+
+# 2.3 Scriptaren Maiztasuna
+"Aurreko zatian aipatu genuen bezala, gure scripta orduoro automatikoki exekutatzeko diseinatuta dago; horrela, azken orduko datuak soilik aztertzeko baldintza ere betetzen du, ahalik eta azkarren."
 ![Captura 4](img/Datu%20base/Captura%20de%20pantalla%202026-04-27%20102244.png)
 
-# 2.1. Duplikatuak Saihestea
-Scriptak SQL SELECT kontsulta bat egiten du datu berri bakoitza txertatu aurretik. Datuak (bulegoa, jatorria, data eta pertsona kopurua) jada existitzen badira, ez dira berriro txertatzen. Honek datuen bikoizketa saihesten du sinkronizazio errepikakorretan.
 
-# 2.2. Data eta Orduaren Zuzenketa
-MongoDBk datak ISO formatuan gordetzen ditu (UTC). Scriptak ordu hauek zuzentzen ditu MariaDBrekin bateragarria den formatura pasatzeko (YYYY-MM-DD HH:MM:SS) eta ordu-eremu lokalera egokitzeko.
+
+
 
 ## 3. Estatistikak eta Agregazioak
 Sistemak automatikoki kalkulatzen ditu turismo estatistikak, orduko txostenak errazteko.
