@@ -362,20 +362,17 @@ ORDER BY bisitariak_guztira DESC;
 ![Captura 3](img/Datu%20base/S5.png)
 
 ## 4. Prozesuen Automatizazioa eta Segurtasuna
-Proiektuaren baldintzak betetzeko, automatizazio eta segurtasun plan bat diseinatu da, Word dokumentuko baldintzak jarraituz.
+Proiektuaren baldintzak betetzeko, automatizazio eta segurtasun plan bat diseinatu dugu
 
 # 4.1. Automatizazioa
-Node.js scripta etengabe exekutatzen da atzealdean (PM2 bezalako tresnekin edo Windows Task Scheduler-ekin), 10 segundoro (edo konfiguratutako denboran) sinkronizazioa eta estatistiken kalkulua egiteko.
+Node.js scripta etengabe exekutatzen da atzealdean (Node-red --> MongoDB --> Script --> MariaDB), orduro sinkronizazioa eta estatistiken kalkulua egiteko.
 
 # 4.2. Datu-basearen Segurtasuna (Backups)
 Datuak babesteko, automatizatutako backup sistema bat ezarri da mysqldump komandoa erabiliz.
 
-Irudia 4: Word dokumentuko backup-ak egiteko baldintzak (euskaraz).
-
 Inplementazioa (Windows .bat Scripta):
 Backup automatikoak egiteko script bat sortu da, Windows-eko Zereginen Planifikatzaileak orduoro exekutatzen duena:
-
-Fragmento de código
+```SQL
 @echo off
 set USER=root
 set PASSWORD=
@@ -385,5 +382,6 @@ set BACKUP_PATH=C:\backups\turismo
 if not exist "%BACKUP_PATH%" mkdir "%BACKUP_PATH%"
 set FILENAME=%DB_NAME%_%date:~-4%%date:~3,2%%date:~0,2%_%time:~0,2%%time:~3,2%.sql
 "C:\xampp\mysql\bin\mysqldump.exe" -u %USER% --databases %DB_NAME% > "%BACKUP_PATH%\%FILENAME%"
+```
 4.3. Estrategia Alternatiboen Azterketa
 mysqldump erabili ordez, Node.js scrip-a JSON fitxategiak esportatzeko konfigura daiteke. Estrategia hau aztertu da eta backup azkarrak egiteko edo datuak beste tresna batzuetara (Excel, adibidez) erraz eramateko baliagarria dela ondorioztatu da.
