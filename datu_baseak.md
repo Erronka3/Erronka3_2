@@ -376,7 +376,7 @@ Backup automatikoak egiteko script bat sortu da, Windows-eko Zereginen Planifika
 set USER=root
 set PASSWORD=
 set DB_NAME=turismo
-set BACKUP_PATH=C:\backups\turismo
+set BACKUP_PATH=C:\backups\turismo_copia
 
 if not exist "%BACKUP_PATH%" mkdir "%BACKUP_PATH%"
 set FILENAME=%DB_NAME%_%date:~-4%%date:~3,2%%date:~0,2%_%time:~0,2%%time:~3,2%.sql
