@@ -2,10 +2,6 @@
 layout: page
 title: Sistema Eragileak
 ---
-
-Hemen duzu dokumentu osoa euskaraz, kode-bloke bakar batean sartuta. Horrela, eskuineko "Kopiatu kodea" botoiari sakatu eta zuzenean zure GitHub-eko README.md fitxategian itsatsi ahal izango duzu, arazorik gabe:
-Markdown
-
 # 🚀 Erronka Proiektua: Debian Zerbitzariaren Monitorizazioa eta Kudeaketa
 
 ![Debian](https://img.shields.io/badge/Debian-12-A81D33?style=for-the-badge&logo=debian&logoColor=white)
@@ -195,3 +191,8 @@ EOF'
 sudo systemctl restart dnsmasq
 sudo systemctl enable dnsmasq
 ```
+
+---
+<div align="center">
+  <i>Sistemen administrazio erronkaren errubrika ebazteko garatua.</i>
+</div>
