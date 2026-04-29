@@ -50,17 +50,17 @@ Hona hemen sare bakoitzaren xehetasunak:
 
 ## 4. Konfigurazioa eta Bideratzea
 
-* [cite_start]**NAT MikroTik-en:** Source NAT (Masquerade) konfiguratuta dago ikasgelako sarerantz internetera irteera emateko[cite: 87, 88].
+**NAT MikroTik-en:** Source NAT (Masquerade) konfiguratuta dago ikasgelako sarerantz internetera irteera emateko
 
-* [cite_start]**Bideratze Purua:** Samba sarean NAT gabe funtzionatzen du barne-ikusgarritasuna errazteko[cite: 89, 91].
+* [cite_start]**Bideratze Purua:** Samba sarean NAT gabe funtzionatzen du barne-ikusgarritasuna errazteko
 
 
 
 ## 5. IPv6 Zerbitzua (DHCPv6)
 
-[cite_start]Langile sarean DHCPv6 zerbitzaria gehitu da helbideak automatikoki banatzeko[cite: 38].
+Langile sarean DHCPv6 zerbitzaria gehitu da helbideak automatikoki banatzeko
 
-* [cite_start]**Pool izena:** POOL-LANGILEAK [cite: 99]
+**Pool izena:** POOL-LANGILEAK 
 
-* [cite_start]**DNS:** 001:4860:4860::8888 [cite: 102]
+**DNS:** 001:4860:4860::8888 
 
