@@ -3,118 +3,197 @@ layout: page
 title: Sistema Eragileak
 ---
 
-##  1. Baliabideen Monitorizazioa eta Kudeaketa
+# 🚀 Proyecto Erronka: Monitorización y Gestión de Servidor Debian
 
-Zerbitzariaren osasuna (RAM, PUZa, Diskoa eta Sarea) bi bideetatik kontrolatu da:
+![Debian](https://img.shields.io/badge/Debian-12-A81D33?style=for-the-badge&logo=debian&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Bash Shell](https://img.shields.io/badge/bash_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Completado-success?style=for-the-badge)
 
-* **Kudeaketa Grafikoa (Cockpit):**
-    ```bash
-    sudo apt install cockpit -y
-    sudo systemctl enable --now cockpit.socket
-    # Sarbidea: [https://192.168.70.147:9090](https://192.168.70.147:9090)
-    ```
-* **Kontsolaren bidezko kudeaketa:**
-    Baliabideak xehetasunez aztertzeko tresna hauek erabili dira:
-    ```bash
-    htop         # RAM eta PUZa monitorizatzeko
-    df -h        # Disko gogorraren espazioa ikusteko
-    nload        # Sare txartelaren trafikoa aztertzeko
-    ```
+Este repositorio contiene la documentación completa y los scripts de configuración de un servidor **Debian 12**. Se detallan los procedimientos para la gestión de recursos, compartición de archivos, monitorización avanzada con contenedores, seguridad automatizada y despliegue por red (PXE).
 
 ---
 
-##  2. Kontenedoreak eta Errendimendu Mugak (Docker)
+## 📋 Tabla de Contenidos
 
-Docker erabili da zerbitzuak isolatzeko, baliabide muga zorrotzak ezarriz:
-
-* **Mugak eta instalazioa:**
-    ```bash
-    # Kontenedore bat muga zehatzekin abiarazteko adibidea:
-    docker run -d --name web-zerbitzaria \
-      --cpus=".5" \
-      --memory="512m" \
-      -p 8080:80 nginx
-    ```
-* **Monitorizazioa eta Alertak:**
-    `docker stats` komandoa erabili da kontenedore bakoitzaren errendimendua web bidez edo kontsolaz aztertzeko eta datuak gordetzeko.
+1. [Acceso Remoto Gráfico (XRDP)](#1-acceso-remoto-gráfico-xrdp)
+2. [Samba y Cuotas de Disco](#2-samba-y-cuotas-de-disco)
+3. [Monitorización (Cockpit, htop, Netdata)](#3-monitorización-cockpit-htop-netdata)
+4. [Docker: Límites y Alertas de Recursos](#4-docker-límites-y-alertas-de-recursos)
+5. [Seguridad y Automatización (Cron + RKHunter)](#5-seguridad-y-automatización-cron--rkhunter)
+6. [Instalación por Red (Servidor PXE)](#6-instalación-por-red-servidor-pxe)
 
 ---
 
-##  3. Fitxategi Partekatuak, Baimenak eta Kuotak (Samba)
+## 1. Acceso Remoto Gráfico (XRDP)
 
-Samba zerbitzaria konfiguratu da Windows eta Linux bezeroentzat:
+Permite la administración visual del servidor desde clientes Windows nativos (RDP) y Linux (Remmina). Se utiliza **XFCE** por ser un entorno de escritorio ligero ideal para servidores.
 
-* **Konfigurazioa (`/etc/samba/smb.conf`):**
-    ```ini
-    [Enpresa_Datuak]
-    path = /mnt/datos_empresa
-    valid users = alex
-    writable = yes
-    browseable = yes
-    ```
-* **Baimenak eta Kuotak:**
-    ```bash
-    # Baimenak zuzendu
-    sudo chown -R alex:alex /mnt/datos_empresa
-    
-    # Kuotak ezarri (500MB muga gogorra)
-    sudo edquota -u alex
-    # Egiaztapena bezeroetatik (Win/Lin):
-    repquota -as /mnt/datos_empresa
-    ```
+```bash
+# 1. Instalación del entorno XFCE y el servidor XRDP
+sudo apt update
+sudo apt install xfce4 xfce4-goodies xrdp dbus-x11 -y
+
+# 2. Forzar el uso de XFCE para sesiones remotas
+echo "xfce4-session" > ~/.xsession
+
+# 3. Aplicar cambios y habilitar el servicio en el arranque
+sudo systemctl restart xrdp
+sudo systemctl enable xrdp
+```
 
 ---
 
-##  4. Urrutiko Kudeaketa Grafikoa (RDP)
+## 2. Samba y Cuotas de Disco
 
-Zerbitzaria saretik kudeatzeko ingurune grafikoa ezarri da:
+Configuración de una carpeta compartida en la red local con políticas estrictas de almacenamiento por usuario (Quotas) para evitar la saturación del disco raíz.
 
-* **Zerbitzarian (xrdp + XFCE):**
-    ```bash
-    sudo apt install xrdp xfce4 xfce4-goodies -y
-    # XFCE lehenetsi /etc/xrdp/startwm.sh fitxategian:
-    echo "startxfce4" >> /etc/xrdp/startwm.sh
-    ```
-* **Bezeroak:**
-    * **Windows:** *Escritorio Remoto* (MSTSC).
-    * **Linux:** **Remmina** aplikazioa, RDP protokoloa erabiliz.
+### 2.1. Despliegue de Samba
+```bash
+sudo apt install samba smbclient -y
+sudo mkdir -p /srv/samba/compartida
+sudo chmod 777 /srv/samba/compartida
 
----
+# Añadir la configuración del recurso compartido al final de smb.conf
+sudo bash -c 'cat >> /etc/samba/smb.conf <<EOF
 
-##  5. Segurtasuna eta Mantentze Automatizatua (Cron)
+[Compartida]
+   path = /srv/samba/compartida
+   browseable = yes
+   read only = no
+   guest ok = yes
+EOF'
 
-Analisia eta eguneratzeak programatu dira:
+sudo systemctl restart smbd
+```
 
-* **Anti-rootkit (rkhunter):**
-    ```bash
-    sudo apt install rkhunter -y
-    sudo rkhunter --propupd # Datu basea eguneratu
-    ```
-* **Programazioa (`crontab -e`):**
-    ```bash
-    # Egunero goizeko 2etan eguneratu eta 3etan rootkit analisia egin
-    00 2 * * * apt update && apt upgrade -y
-    00 3 * * * rkhunter --check --sk
-    ```
+### 2.2. Implementación de Cuotas (Quotas)
+> **Nota:** Requiere modificar `/etc/fstab` añadiendo `,usrquota,grpquota` en las opciones de montaje de la partición raíz `/`.
 
----
+```bash
+sudo apt install quota quotatool -y
+sudo mount -o remount /
+sudo quotacheck -cum /
+sudo quotaon -v /
 
-##  6. Sare Bidezko Instalazio Azpiegitura (PXE)
-
-Bezeroak saretik instalatzeko sistema:
-
-* **DHCP Konfigurazioa (`/etc/dhcp/dhcpd.conf`):**
-    ```text
-    next-server 192.168.70.147;
-    filename "pxelinux.0";
-    ```
-* **TFTP Zerbitzaria:** `/srv/tftp/` direktorioan boot fitxategiak eta instalazio menuak prestatu dira.
+# Asignar límite de espacio a un usuario específico (ej: jokin)
+sudo edquota -u jokin
+```
 
 ---
 
-##  7. Biltegiratze Azpiegitura (RAID & LVM)
+## 3. Monitorización (Cockpit, htop, Netdata)
 
-Datuen segurtasuna bermatzeko:
+Gestión integral del rendimiento del sistema utilizando herramientas de CLI y Web UI.
 
-* **RAID 5:** `sudo mdadm --create /dev/md0 --level=5 --raid-devices=3 /dev/sdb /dev/sdc /dev/sdd`
-* **LVM:** `pvcreate /dev/md0` -> `vgcreate vg_data /dev/md0` -> `lvcreate -L 10G -n lv_files vg_data`
+* **htop**: Monitorización rápida de procesos por terminal.
+* **Cockpit**: Panel de control web general del host (Puerto `9090`).
+
+```bash
+sudo apt install htop cockpit -y
+sudo systemctl enable --now cockpit.socket
+```
+
+---
+
+## 4. Docker: Límites y Alertas de Recursos
+
+Gestión de servicios en contenedores con restricciones de hardware y envío de alertas automáticas ante consumos anómalos.
+
+### Despliegue de Netdata en Contenedor
+Se vinculan los volúmenes del sistema anfitrión para permitir una lectura profunda del hardware:
+```bash
+sudo docker run -d --name=netdata \
+  -p 19999:19999 \
+  -v /proc:/host/proc:ro \
+  -v /sys:/host/sys:ro \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  --restart unless-stopped \
+  netdata/netdata
+```
+
+### Inyección de Alertas Personalizadas (RAM Crítica)
+```bash
+sudo docker exec -i netdata sh -c "cat >> /etc/netdata/health.d/cgroups.conf" <<EOF
+template: cgroup_mem_critico
+      on: cgroup.mem_usage
+    lookback: 30s
+    calc: (\$ram) * 100 / \$mem_usage_limit
+   units: %
+    warn: \$this > 80
+    crit: \$this > 95
+    info: ALERTA: Consumo de RAM critico en contenedor. Riesgo de OOM.
+EOF
+
+sudo docker restart netdata
+```
+
+---
+
+## 5. Seguridad y Automatización (Cron + RKHunter)
+
+Protección proactiva contra intrusiones (Rootkits) y mantenimiento desatendido del sistema.
+
+### Instalación y Actualización de RKHunter
+```bash
+sudo apt install rkhunter -y
+sudo rkhunter --update
+sudo rkhunter --propupd
+```
+
+### Automatización con Crontab
+Programación de escaneos y actualizaciones en horario nocturno:
+```bash
+sudo bash -c 'cat >> /var/spool/cron/crontabs/root <<EOF
+# 02:00 AM - Escaneo de seguridad y generacion de logs
+0 2 * * * /usr/bin/rkhunter --check --cronjob >> /var/log/rkhunter_diario.log
+
+# 03:00 AM - Actualizacion completa del sistema (Parches de seguridad)
+0 3 * * * apt update && apt upgrade -y
+EOF'
+```
+
+---
+
+## 6. Instalación por Red (Servidor PXE)
+
+Infraestructura para el despliegue automático de Sistemas Operativos en clientes nuevos mediante la red local (PXE Boot), eliminando la necesidad de medios físicos.
+
+```bash
+# 1. Instalación de servicios Core (DHCP/TFTP/Bootloader)
+sudo apt install dnsmasq pxelinux syslinux-efi -y
+sudo mkdir -p /srv/tftp/pxelinux.cfg
+
+# 2. Preparación de archivos de arranque
+sudo cp /usr/lib/PXELINUX/pxelinux.0 /srv/tftp/
+sudo cp /usr/lib/syslinux/modules/bios/ldlinux.c32 /srv/tftp/
+
+# 3. Configuración de Dnsmasq
+sudo bash -c 'cat >> /etc/dnsmasq.conf <<EOF
+interface=enp0s3
+dhcp-range=192.168.70.200,192.168.70.250,12h
+enable-tftp
+tftp-root=/srv/tftp
+dhcp-boot=pxelinux.0
+EOF'
+
+# 4. Creación del menú de arranque PXE
+sudo bash -c 'cat > /srv/tftp/pxelinux.cfg/default <<EOF
+DEFAULT menu.c32
+PROMPT 0
+TIMEOUT 300
+MENU TITLE Instalacion por Red (PXE)
+LABEL local
+  MENU LABEL Arrancar desde disco duro
+  LOCALBOOT 0
+EOF'
+
+# 5. Aplicar configuración
+sudo systemctl restart dnsmasq
+sudo systemctl enable dnsmasq
+```
+
+---
+<div align="center">
+  <i>Desarrollado para la resolución de la rúbrica de administración de sistemas.</i>
+</div>
