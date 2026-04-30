@@ -64,4 +64,4 @@ Garapen prozesuan, JSON formatuko datu-multzoak proiektuak erabiltzen duen XML f
 
 1. **Bihurketa:** `jsonAXml` funtzioak JSON objektuaren propietateak XML etiketa bihurtzen ditu modu errekurtsiboan.
 2. **Deskarga:** `Blob` objektu bat sortzen da eta nabigatzaileari XML fitxategia deskargatzeko agindua ematen zaio.
-![Captura txostena](img/Markatze%20lengoaiak/txostena.png)
+![Captura txostena](img/Markatze%20lengoaiak/xml.png)
