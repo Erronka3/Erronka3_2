@@ -58,10 +58,12 @@ Aplikazioa bezeroaren aldeko (*client-side*) arkitektura baten gainean eraiki da
 
 ---
 
-## 5. Datuen Bihurketa: JSON-etik XML-ra (Script-a)
+## 5. Datuen Bihurketa: JSON-etik XML-ra
 
 Garapen prozesuan, JSON formatuko datu-multzoak proiektuak erabiltzen duen XML formatura bihurtzeko script laguntzaile bat erabili dugu. Kode hau nabigatzailearen kontsolan (F12) exekutatzen da eta bihurketa automatizatzen du:
 
 1. **Bihurketa:** `jsonAXml` funtzioak JSON objektuaren propietateak XML etiketa bihurtzen ditu modu errekurtsiboan.
-2. **Deskarga:** `Blob` objektu bat sortzen da eta nabigatzaileari XML fitxategia deskargatzeko agindua ematen zaio.
 ![Captura txostena](img/Markatze%20lengoaiak/xml.png)
+## 5.1. Datuen Bihurketa: JSON-etik XML-ra konprobaketa
+
+Bihurketa ondo eginda dagoen jakiteko aukera desberdinak daude. Guk fitxategia nabigazio horrian irekitzea aukeratu dugu, eta errorerik ez dagoela jarri digu. 
