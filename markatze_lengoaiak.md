@@ -21,7 +21,7 @@ Aplikazioa bezeroaren aldeko (*client-side*) arkitektura baten gainean eraiki da
 
 ## 2. Fitxategien Egitura eta Eginkizunak
 
-###  HTML (Egitura)
+### HTML (Egitura)
 * **`sarrera.html`**: Hasiera orria eta proiektuaren testuingurua.
 ![Captura sarrera](img/Markatze%20lengoaiak/sarrera.png)
 
@@ -31,12 +31,12 @@ Aplikazioa bezeroaren aldeko (*client-side*) arkitektura baten gainean eraiki da
 * **`txostena.html`**: Open Data atala, JSON deskargekin.
 ![Captura txostena](img/Markatze%20lengoaiak/txostena.png)
 
-###  CSS eta  JS
+### CSS eta JS
 * **`3erronka.css`**: Estilo fitxategi bateratua (kolore paleta berdea).
 * **`3erronka.js`**: Logika nagusia (AJAX, Parsing eta Chart.js).
 * **`opendata.js`**: Deskarga sistemarako logika gehigarria.
 
-###  Data
+### Data
 * **`datuak.xml`**: Proiektuaren "datu-basea".
 
 ---
@@ -55,3 +55,12 @@ Aplikazioa bezeroaren aldeko (*client-side*) arkitektura baten gainean eraiki da
 * **Datuen Bistaratzea:** Grafiko dinamikoak panel nagusian.
 * **Iragazki Sistema:** Datuak **egunaren** edo **jatorriaren** arabera iragazi daitezke.
 * **Open Data:** Datu gordinak **JSON formatuan** deskargatzeko aukera.
+
+---
+
+## 5. Datuen Bihurketa: JSON-etik XML-ra (Script-a)
+
+Garapen prozesuan, JSON formatuko datu-multzoak proiektuak erabiltzen duen XML formatura bihurtzeko script laguntzaile bat erabili dugu. Kode hau nabigatzailearen kontsolan (F12) exekutatzen da eta bihurketa automatizatzen du:
+
+1. **Bihurketa:** `jsonAXml` funtzioak JSON objektuaren propietateak XML etiketa bihurtzen ditu modu errekurtsiboan.
+2. **Deskarga:** `Blob` objektu bat sortzen da eta nabigatzaileari XML fitxategia deskargatzeko agindua ematen zaio.
