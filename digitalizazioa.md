@@ -42,7 +42,7 @@ Horien artean, IP Whitlelist, horrela zein IP helbidetatik sartu daitekeen mugat
 
 ![captura 4](img/Digi/4.png)
 
-Behin datuak hodeian ditugula, Adimen Artifiziala MongoDB Atlas-ean integratu digu. Datu-baseari gaitasun adimentsuak emateko, Atlas Vector Search konfiguratu dugu. Bestalde, API gakoa ere sartu diogu. API gakoa pasahitz berezi bat bezalakoa da, erronkan baimena emango diona Adimen Artifizialeko modeloak erabiltzeko.
+Behin datuak hodeian ditugula, Adimen Artifiziala MongoDB Atlas-ean integratu digu. Datu-baseari gaitasun adimentsuak emateko, Atlas Vector Search konfiguratu dugu. Bestalde, API gakoa ere sartu diogu. API gakoa pasahitz berezi bat bezalakoa da, erronkan baimena emango diona Software batek beste batekin hitz egiteko.
 
 ![captura 5](img/Digi/5.png)
 
