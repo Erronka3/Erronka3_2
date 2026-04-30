@@ -382,3 +382,14 @@ if not exist "%BACKUP_PATH%" mkdir "%BACKUP_PATH%"
 set FILENAME=%DB_NAME%_%date:~-4%%date:~3,2%%date:~0,2%_%time:~0,2%%time:~3,2%.sql
 "C:\xampp\mysql\bin\mysqldump.exe" -u %USER% --databases %DB_NAME% > "%BACKUP_PATH%\%FILENAME%"
 ```
+## 4.3 Aztertutako Estrategia Alternatiboak
+Datuak babesteko orduan, hiru bide nagusi aztertu dira proiektu honen segurtasuna bermatzeko:
+
+1-JSON Esportazioa:
+Metodo arina eta unibertsala da. Oso erabilgarria da datuak beste tresna batzuetara (Excel, adibidez) erraz eramateko, baina ez du datu-basearen egitura konplexua (loturak eta gakoak) gordetzen.
+
+2-MariaDB Erreplikazioa:
+Segurtasun maila altuena eskaintzen du, datuak denbora errealean kopiatzen baitira beste zerbitzari batean. Desabantaila nagusia azpiegitura kostua da, bigarren zerbitzari bat piztuta mantentzea eskatzen baitu.
+
+3-Hodeiko Kopiak (Cloud):
+Hardware akatsen aurrean (disko gogorrak apurtzea) babes hoberena da. Hala ere, interneteko konexioaren menpe dago eta mantentze-kostu gehigarriak izan ditzake datu bolumenaren arabera.
