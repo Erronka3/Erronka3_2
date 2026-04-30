@@ -67,3 +67,4 @@ Garapen prozesuan, JSON formatuko datu-multzoak proiektuak erabiltzen duen XML f
 ## 5.1. Datuen Bihurketa: JSON-etik XML-ra konprobaketa
 
 Bihurketa ondo eginda dagoen jakiteko aukera desberdinak daude. Guk fitxategia nabigazio horrian irekitzea aukeratu dugu, eta errorerik ez dagoela jarri digu. 
+![Captura txostena](img/Markatze%20lengoaiak/xml.png)
